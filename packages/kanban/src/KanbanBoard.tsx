@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button, Spinner } from "@Taskvault/ui-components";
+import { Button, Spinner } from "@devboard/ui-components";
 import { Task, Status, COLUMNS, CreateTaskInput } from "./types";
 import { useTaskStore } from "./useTaskStore";
 import { TaskCard } from "./components/TaskCard";

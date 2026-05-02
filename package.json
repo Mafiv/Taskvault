@@ -1,5 +1,5 @@
 {
-  "name": "Taskvault",
+  "name": "devboard",
   "private": true,
   "workspaces": [
     "packages/*",

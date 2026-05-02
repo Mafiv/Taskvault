@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: [
-    "@Taskvault/ui-components",
-    "@Taskvault/kanban",
-    "@Taskvault/snippetvault",
-    "@Taskvault/utils",
+    "@devboard/ui-components",
+    "@devboard/kanban",
+    "@devboard/snippetvault",
+    "@devboard/utils",
   ],
 };
 

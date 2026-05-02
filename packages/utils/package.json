@@ -1,5 +1,5 @@
 {
-  "name": "@Taskvault/utils",
+  "name": "@devboard/utils",
   "version": "0.0.1",
   "private": true,
   "main": "./src/index.ts",

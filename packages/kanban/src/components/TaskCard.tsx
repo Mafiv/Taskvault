@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, CardBody, Badge } from "@Taskvault/ui-components";
+import { Card, CardBody, Badge } from "@devboard/ui-components";
 import { Task, Priority, Status } from "../types";
 
 const priorityConfig: Record<Priority, { label: string; color: "red" | "yellow" | "blue" }> = {

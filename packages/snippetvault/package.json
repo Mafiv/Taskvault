@@ -1,12 +1,12 @@
 {
-  "name": "@Taskvault/snippetvault",
+  "name": "@devboard/snippetvault",
   "version": "0.0.1",
   "private": true,
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "dependencies": {
-    "@Taskvault/ui-components": "*",
-    "@Taskvault/utils": "*"
+    "@devboard/ui-components": "*",
+    "@devboard/utils": "*"
   },
   "devDependencies": {
     "typescript": "^5.4.0",

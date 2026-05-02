@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Task, CreateTaskInput, UpdateTaskInput, Status } from "./types";
 
-const STORAGE_KEY = "Taskvault:tasks";
+const STORAGE_KEY = "devboard:tasks";
 
 function generateId(): string {
   return `task_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;

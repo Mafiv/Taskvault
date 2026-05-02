@@ -1,5 +1,5 @@
 {
-  "name": "@Taskvault/kanban",
+  "name": "@devboard/kanban",
   "version": "0.0.1",
   "private": true,
   "main": "./src/index.ts",
@@ -8,8 +8,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@Taskvault/ui-components": "*",
-    "@Taskvault/utils": "*"
+    "@devboard/ui-components": "*",
+    "@devboard/utils": "*"
 
   },
   "devDependencies": {

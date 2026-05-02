@@ -1,4 +1,4 @@
-# Taskvault
+# DevBoard
 
 **A developer productivity workspace — task tracking and code snippet management in one place.**
 
@@ -8,7 +8,7 @@ Built as a modular monorepo using Turborepo and npm workspaces, with shared UI c
 
 ## What it does
 
-Taskvault has two core features:
+DevBoard has two core features:
 
 **Tasks** — A kanban-style board for managing your work. Create tasks, assign priorities, set due dates, and move them across columns as you make progress.
 
@@ -19,9 +19,9 @@ Taskvault has two core features:
 ## Monorepo structure
 
 ```
-Taskvault/
+devboard/
 ├── apps/
-│   └── Taskvault/          # Next.js 14 application
+│   └── devboard/          # Next.js 14 application
 │
 ├── packages/
 │   ├── ui-components/     # Shared React component library
@@ -37,7 +37,7 @@ Taskvault/
 
 ## Packages
 
-### `@Taskvault/ui-components`
+### `@devboard/ui-components`
 Reusable React components used across all features. Built from scratch with Tailwind CSS.
 
 | Component | Description |
@@ -50,7 +50,7 @@ Reusable React components used across all features. Built from scratch with Tail
 | `Spinner` | Animated loading indicator |
 | `Toast` | Auto-dismissing notification for success, error, and info |
 
-### `@Taskvault/utils`
+### `@devboard/utils`
 Pure utility functions and React hooks shared across packages.
 
 | Export | Description |
@@ -63,7 +63,7 @@ Pure utility functions and React hooks shared across packages.
 | `sortBy` | Sorts an array of objects by a key, ascending or descending |
 | `getStored` / `setStored` | Type-safe localStorage read/write helpers |
 
-### `@Taskvault/kanban`
+### `@devboard/kanban`
 The kanban task tracker. All state lives in `localStorage` — no backend required.
 
 **Features:**
@@ -75,7 +75,7 @@ The kanban task tracker. All state lives in `localStorage` — no backend requir
 - Live search and filter by task title
 - Drag and drop tasks across columns
 
-### `@Taskvault/snippetvault`
+### `@devboard/snippetvault`
 The code snippet vault. Save and organize code for reuse.
 
 **Features:**
@@ -94,8 +94,8 @@ The code snippet vault. Save and organize code for reuse.
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/YOUR_USERNAME/Taskvault.git
-cd Taskvault
+git clone https://github.com/YOUR_USERNAME/devboard.git
+cd devboard
 
 # 2. Install all dependencies from root
 npm install

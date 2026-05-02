@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Input, Textarea } from "@Taskvault/ui-components";
+import { Modal, Button, Input, Textarea } from "@devboard/ui-components";
 import { Task, CreateTaskInput, Priority, Status } from "../types";
 
 interface TaskFormModalProps {
