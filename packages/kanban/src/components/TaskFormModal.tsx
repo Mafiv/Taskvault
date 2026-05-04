@@ -15,7 +15,7 @@ interface TaskFormModalProps {
 const emptyForm = (): CreateTaskInput => ({
   title: "",
   description: "",
-  priority: "medium",
+  priority: "Medium",
   status: "todo",
   dueDate: "",
 });
@@ -104,9 +104,9 @@ export function TaskFormModal({
               onChange={e => set("priority", e.target.value as Priority)}
               className="rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 bg-white/50"
             >
-              <option value="high">High</option>
-              <option value="medium">Medium</option>
-              <option value="low">Low</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
             </select>
           </div>
 

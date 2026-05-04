@@ -2,12 +2,13 @@
 
 import React from "react";
 import { Card, CardBody, Badge } from "@devboard/ui-components";
+import { formatDate } from "@devboard/utils";
 import { Task, Priority, Status } from "../types";
 
 const priorityConfig: Record<Priority, { label: string; color: "red" | "yellow" | "blue" }> = {
-  high:   { label: "High",   color: "red" },
-  medium: { label: "Medium", color: "yellow" },
-  low:    { label: "Low",    color: "blue" },
+  High:   { label: "High",   color: "red" },
+  Medium: { label: "Medium", color: "yellow" },
+  Low:    { label: "Low",    color: "blue" },
 };
 
 const statusOptions: { value: Status; label: string }[] = [
@@ -72,7 +73,7 @@ export function TaskCard({ task, onEdit, onDelete, onMove }: TaskCardProps) {
             {task.dueDate && (
               <span className={["text-xs font-medium px-2 py-1 rounded-full", overdue ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-600"].join(" ")}>
                 {overdue ? "⚠ " : ""}
-                {new Date(task.dueDate).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                {formatDate(task.dueDate)}
               </span>
             )}
           </div>
