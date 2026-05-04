@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useLocalStorage } from "@devboard/utils";
 import { Task, CreateTaskInput, UpdateTaskInput, Status } from "./types";
 
 const STORAGE_KEY = "devboard:tasks";
@@ -9,36 +10,12 @@ function generateId(): string {
   return `task_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
 }
 
-function loadFromStorage(): Task[] {
-  if (typeof window === "undefined") return [];
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveToStorage(tasks: Task[]) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-  } catch {
-    // ignore storage errors
-  }
-}
-
 export function useTaskStore() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useLocalStorage<Task[]>(STORAGE_KEY, []);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    setTasks(loadFromStorage());
     setHydrated(true);
-  }, []);
-
-  const persist = useCallback((next: Task[]) => {
-    setTasks(next);
-    saveToStorage(next);
   }, []);
 
   const addTask = useCallback((input: CreateTaskInput): Task => {
@@ -49,35 +26,31 @@ export function useTaskStore() {
     };
     setTasks(prev => {
       const next = [task, ...prev];
-      saveToStorage(next);
       return next;
     });
     return task;
-  }, []);
+  }, [setTasks]);
 
   const updateTask = useCallback((id: string, input: UpdateTaskInput) => {
     setTasks(prev => {
       const next = prev.map(t => t.id === id ? { ...t, ...input } : t);
-      saveToStorage(next);
       return next;
     });
-  }, []);
+  }, [setTasks]);
 
   const deleteTask = useCallback((id: string) => {
     setTasks(prev => {
       const next = prev.filter(t => t.id !== id);
-      saveToStorage(next);
       return next;
     });
-  }, []);
+  }, [setTasks]);
 
   const moveTask = useCallback((id: string, status: Status) => {
     setTasks(prev => {
       const next = prev.map(t => t.id === id ? { ...t, status } : t);
-      saveToStorage(next);
       return next;
     });
-  }, []);
+  }, [setTasks]);
 
   const getByStatus = useCallback((status: Status) => {
     return tasks.filter(t => t.status === status);
