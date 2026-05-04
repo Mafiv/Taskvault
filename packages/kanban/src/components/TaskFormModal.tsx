@@ -72,12 +72,12 @@ export function TaskFormModal({
       title={isEdit ? "Edit task" : "New task"}
       footer={
         <>
-          <Button variant="secondary" size="sm" onClick={onClose}>Cancel</Button>
-          <Button size="sm" onClick={handleSubmit}>{isEdit ? "Save changes" : "Create task"}</Button>
+          <Button variant="secondary" size="md" onClick={onClose}>Cancel</Button>
+          <Button size="md" onClick={handleSubmit}>{isEdit ? "Save changes" : "Create task"}</Button>
         </>
       }
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-5">
         <Input
           label="Title"
           placeholder="What needs to be done?"
@@ -92,17 +92,17 @@ export function TaskFormModal({
           placeholder="Add more details..."
           value={form.description}
           onChange={e => set("description", e.target.value)}
-          rows={3}
+          rows={4}
         />
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           {/* Priority */}
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2">
             <label className="text-sm font-medium text-gray-700">Priority</label>
             <select
               value={form.priority}
               onChange={e => set("priority", e.target.value as Priority)}
-              className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 bg-white/50"
             >
               <option value="high">High</option>
               <option value="medium">Medium</option>
@@ -111,12 +111,12 @@ export function TaskFormModal({
           </div>
 
           {/* Status */}
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2">
             <label className="text-sm font-medium text-gray-700">Column</label>
             <select
               value={form.status}
               onChange={e => set("status", e.target.value as Status)}
-              className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 bg-white/50"
             >
               <option value="todo">To do</option>
               <option value="in-progress">In progress</option>

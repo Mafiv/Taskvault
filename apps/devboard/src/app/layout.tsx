@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AuthProvider } from "@devboard/auth";
 
 export const metadata: Metadata = {
   title: "DevBoard",
@@ -7,17 +8,22 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const firebaseConfig = {
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  };
+
   return (
     <html lang="en">
       <body className="bg-gray-100 min-h-screen antialiased">
-        <nav className="bg-white border-b border-gray-200 px-6 py-3 flex items-center gap-6 sticky top-0 z-40">
-          <span className="font-bold text-indigo-600 text-lg tracking-tight">DevBoard</span>
-          <a href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Tasks</a>
-          <a href="/snippets" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Snippets</a>
-        </nav>
-        <main className="max-w-7xl mx-auto px-6 py-6">
+        <AuthProvider firebaseConfig={firebaseConfig}>
           {children}
-        </main>
+        </AuthProvider>
       </body>
     </html>
   );
