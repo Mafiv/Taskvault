@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { Snippet, CreateSnippetInput, UpdateSnippetInput } from "./types";
 

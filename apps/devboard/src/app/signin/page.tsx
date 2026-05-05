@@ -10,7 +10,7 @@ export default function SignInPage() {
 
   useEffect(() => {
     if (!loading && user) {
-      router.replace("/");
+      router.replace("/dashboard");
     }
   }, [loading, router, user]);
 
