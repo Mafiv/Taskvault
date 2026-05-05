@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  signInWithRedirect,
+  signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
 import { getFirebaseAuth } from "./firebase";
@@ -59,7 +59,7 @@ export function AuthForm() {
       } else {
         await signInWithEmailAndPassword(auth, email, password);
       }
-      router.replace("/");
+      router.replace("/dashboard");
     } catch (err: any) {
       setError(getFriendlyError(err.code));
     } finally {
@@ -72,7 +72,8 @@ export function AuthForm() {
     setGoogleLoading(true);
     const auth = getFirebaseAuth();
     try {
-      await signInWithRedirect(auth, googleProvider);
+      await signInWithPopup(auth, googleProvider);
+      router.replace("/dashboard");
     } catch (err: any) {
       setError(getFriendlyError(err.code));
     } finally {
@@ -81,19 +82,19 @@ export function AuthForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-[#0a0a0a] px-4 transition-colors duration-300">
+      <div className="max-w-md w-full bg-white dark:bg-zinc-900/80 backdrop-blur-xl border border-gray-100 dark:border-white/10 rounded-3xl shadow-xl dark:shadow-2xl p-8 transition-colors duration-300">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 text-center flex items-center justify-center gap-2">
           {isSignUp ? "Create an account" : "Welcome back"}
         </h2>
-        <p className="text-sm text-gray-500 text-center mb-6">
+        <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-8">
           {isSignUp
-            ? "Sign up to get started with DevBoard"
-            : "Sign in to your DevBoard account"}
+            ? "Sign up to get started with TaskVault"
+            : "Sign in to your TaskVault account"}
         </p>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm">
+          <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400 px-4 py-3 rounded-xl mb-6 text-sm">
             {error}
           </div>
         )}
@@ -103,12 +104,12 @@ export function AuthForm() {
           type="button"
           onClick={handleGoogleSignIn}
           disabled={googleLoading || loading}
-          className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mb-4"
+          className="w-full flex items-center justify-center gap-3 bg-white dark:bg-zinc-800 border border-gray-300 dark:border-white/10 rounded-xl py-3 text-sm font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-zinc-700 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-6 shadow-sm"
         >
           {googleLoading ? (
-            <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600 inline-block" />
+            <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-600 dark:border-gray-400 inline-block" />
           ) : (
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615Z" fill="#4285F4"/>
               <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18Z" fill="#34A853"/>
               <path d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332Z" fill="#FBBC05"/>
@@ -119,19 +120,19 @@ export function AuthForm() {
         </button>
 
         {/* Divider */}
-        <div className="relative mb-4">
+        <div className="relative mb-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200" />
+            <div className="w-full border-t border-gray-200 dark:border-white/10" />
           </div>
           <div className="relative flex justify-center text-xs">
-            <span className="bg-white px-2 text-gray-400">or continue with email</span>
+            <span className="bg-white dark:bg-[#151517] px-3 text-gray-400 dark:text-gray-500 uppercase tracking-wider font-semibold rounded-full border border-gray-100 dark:border-white/5">or continue with email</span>
           </div>
         </div>
 
         {/* Email / Password form */}
-        <form onSubmit={handleAuth} className="space-y-4">
+        <form onSubmit={handleAuth} className="space-y-5">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">
               Email
             </label>
             <input
@@ -140,13 +141,13 @@ export function AuthForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-colors"
+              className="w-full px-4 py-3 bg-gray-50 dark:bg-zinc-900/50 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 shadow-sm"
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="password" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">
               Password
             </label>
             <input
@@ -156,7 +157,7 @@ export function AuthForm() {
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-colors"
+              className="w-full px-4 py-3 bg-gray-50 dark:bg-zinc-900/50 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600 shadow-sm"
               placeholder="••••••••"
             />
           </div>
@@ -164,17 +165,17 @@ export function AuthForm() {
           <button
             type="submit"
             disabled={loading || googleLoading}
-            className="w-full bg-indigo-600 text-white py-2.5 rounded-lg font-medium hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full bg-primary-600 text-white py-3 rounded-xl font-bold hover:bg-primary-700 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md shadow-primary-600/20 hover:shadow-lg hover:-translate-y-0.5"
           >
             {loading ? "Loading…" : isSignUp ? "Sign Up" : "Sign In"}
           </button>
         </form>
 
-        <div className="mt-4 text-center">
+        <div className="mt-8 text-center">
           <button
             type="button"
             onClick={() => { setIsSignUp(!isSignUp); setError(""); }}
-            className="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
           >
             {isSignUp ? "Already have an account? Sign in" : "Don't have an account? Sign up"}
           </button>
