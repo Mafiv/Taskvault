@@ -18,5 +18,8 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "npm@11.8.0"
+  "packageManager": "npm@11.8.0",
+  "dependencies": {
+    "@devboard/ui-components": "^0.0.1"
+  }
 }
