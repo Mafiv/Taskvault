@@ -1,4 +1,4 @@
-# DevBoard
+# TaskVault
 
 **A developer productivity workspace — task tracking and code snippet management in one place.**
 
