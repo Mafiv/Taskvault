@@ -47,17 +47,20 @@ export function KanbanBoard() {
   return (
     <div className="h-full flex flex-col gap-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Task Board</h1>
-          <p className="text-sm text-gray-500 mt-1">{tasks.length} {tasks.length === 1 ? 'task' : 'tasks'} total</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Task Board</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{tasks.length} {tasks.length === 1 ? 'task' : 'tasks'} total</p>
         </div>
-        <Button onClick={() => handleAddInColumn("todo")} size="md">
+        <button 
+          onClick={() => handleAddInColumn("todo")}
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-primary-600 dark:bg-primary-500 rounded-xl hover:bg-primary-700 dark:hover:bg-primary-600 transition-all shadow-md shadow-primary-600/20 hover:shadow-lg hover:-translate-y-0.5"
+        >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
           </svg>
           New Task
-        </Button>
+        </button>
       </div>
 
       {/* Board */}
@@ -67,19 +70,19 @@ export function KanbanBoard() {
           return (
             <div
               key={col.id}
-              className="flex flex-col gap-4 bg-gradient-to-b from-gray-50 to-white rounded-2xl p-4 border border-gray-200/60 shadow-sm min-h-[500px]"
+              className="flex flex-col gap-4 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-xl rounded-3xl p-5 border border-gray-200/60 dark:border-white/5 shadow-sm min-h-[500px] transition-colors duration-300"
             >
               {/* Column header */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between px-1">
                 <div className="flex items-center gap-3">
-                  <span className="text-base font-semibold text-gray-800">{col.label}</span>
-                  <span className="bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-full">
+                  <span className="text-sm font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300">{col.label}</span>
+                  <span className="bg-primary-100 dark:bg-primary-500/20 text-primary-700 dark:text-primary-300 text-xs font-bold px-2.5 py-1 rounded-full border border-primary-200 dark:border-primary-500/30">
                     {colTasks.length}
                   </span>
                 </div>
                 <button
                   onClick={() => handleAddInColumn(col.id)}
-                  className="text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all duration-200 p-2 rounded-lg"
+                  className="text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-all duration-200 p-2 rounded-xl"
                   title={`Add to ${col.label}`}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -89,13 +92,13 @@ export function KanbanBoard() {
               </div>
 
               {/* Tasks */}
-              <div className="flex flex-col gap-3 flex-1">
+              <div className="flex flex-col gap-3 flex-1 overflow-y-auto pr-1 custom-scrollbar">
                 {colTasks.length === 0 ? (
-                  <div className="flex-1 flex flex-col items-center justify-center gap-3 text-gray-400 py-12">
-                    <svg className="w-8 h-8 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex-1 flex flex-col items-center justify-center gap-3 text-gray-400 dark:text-gray-500 py-12">
+                    <svg className="w-10 h-10 opacity-20 dark:opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
-                    <span className="text-sm font-medium">No tasks yet</span>
+                    <span className="text-sm font-semibold tracking-wide">No tasks yet</span>
                   </div>
                 ) : (
                   colTasks.map(task => (

@@ -38,20 +38,26 @@ const languageClassMap: Record<CodeLanguage, string> = {
 
 export function SnippetPreview({ snippet }: SnippetPreviewProps) {
   return (
-    <div className="rounded-lg border border-gray-300 bg-gray-900 overflow-hidden">
+    <div className="flex flex-col h-full bg-[#0d1117]">
       {/* Header */}
-      <div className="bg-gray-800 px-4 py-3 border-b border-gray-700 flex items-center justify-between">
-        <div>
-          <h3 className="text-sm font-semibold text-white">{snippet.title}</h3>
-          <p className="text-xs text-gray-400 mt-1">
-            {snippet.language.toUpperCase()} • Created {new Date(snippet.createdAt).toLocaleDateString()}
-          </p>
+      <div className="bg-[#161b22] px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          {/* macOS window controls mock */}
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+          </div>
+          <h3 className="text-sm font-semibold text-gray-200 ml-2">{snippet.title}</h3>
         </div>
+        <span className="text-[10px] uppercase font-bold tracking-wider text-gray-500 bg-gray-800 px-2 py-1 rounded-md">
+          {snippet.language}
+        </span>
       </div>
 
       {/* Code Block */}
-      <div className="overflow-auto">
-        <pre className="text-sm text-gray-100 p-4 font-mono leading-relaxed">
+      <div className="flex-1 overflow-auto max-h-[250px] custom-scrollbar">
+        <pre className="text-[13px] text-gray-300 p-4 font-mono leading-loose">
           <code className={languageClassMap[snippet.language]}>
             {snippet.code}
           </code>
