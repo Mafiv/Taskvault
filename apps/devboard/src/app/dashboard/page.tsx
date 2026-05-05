@@ -1,12 +1,12 @@
-import { SnippetVault } from "@devboard/snippetvault";
+import { KanbanBoard } from "@devboard/kanban";
 import { ProtectedRoute, AppShell } from "@devboard/auth";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-export default function SnippetsPage() {
+export default function DashboardPage() {
   return (
     <ProtectedRoute>
       <AppShell rightNavItems={<ThemeToggle />}>
-        <SnippetVault />
+        <KanbanBoard />
       </AppShell>
     </ProtectedRoute>
   );

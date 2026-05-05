@@ -40,20 +40,22 @@ export function SnippetVault() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Code Snippets</h1>
-          <p className="text-sm text-gray-600 mt-1">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Code Snippets</h1>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
             Save and organize your favorite code snippets
           </p>
         </div>
-        <Button
-          variant="primary"
-          size="lg"
+        <button
           onClick={() => setFormOpen(true)}
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-primary-600 dark:bg-primary-500 rounded-xl hover:bg-primary-700 dark:hover:bg-primary-600 transition-all shadow-md shadow-primary-600/20 hover:shadow-lg hover:-translate-y-0.5"
         >
-          + New Snippet
-        </Button>
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+          </svg>
+          New Snippet
+        </button>
       </div>
 
       {/* Form Modal */}
@@ -66,10 +68,10 @@ export function SnippetVault() {
 
       {/* Snippets Grid */}
       {store.snippets.length === 0 ? (
-        <div className="text-center py-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+        <div className="text-center py-20 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-xl rounded-3xl border border-gray-200/60 dark:border-white/5 shadow-sm transition-colors duration-300">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary-50 dark:bg-primary-500/10 mb-6 shadow-sm">
             <svg
-              className="w-8 h-8 text-gray-400"
+              className="w-8 h-8 text-primary-500 dark:text-primary-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -77,26 +79,26 @@ export function SnippetVault() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                strokeWidth={2}
+                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
               />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
             No snippets yet
           </h3>
-          <p className="text-sm text-gray-600 mb-6">
-            Create your first snippet to get started
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8 max-w-sm mx-auto">
+            Create your first snippet to securely store and organize your reusable code blocks.
           </p>
-          <Button
-            variant="primary"
+          <button
             onClick={() => setFormOpen(true)}
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-500/10 rounded-xl hover:bg-primary-100 dark:hover:bg-primary-500/20 transition-all border border-primary-100 dark:border-primary-500/20"
           >
             Create Snippet
-          </Button>
+          </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {store.snippets.map((snippet) => (
             <SnippetCard
               key={snippet.id}

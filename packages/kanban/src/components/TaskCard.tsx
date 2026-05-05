@@ -34,15 +34,15 @@ export function TaskCard({ task, onEdit, onDelete, onMove }: TaskCardProps) {
   const overdue = isOverdue(task.dueDate) && task.status !== "done";
 
   return (
-    <Card className={["group transition-all duration-200 hover:shadow-md", overdue ? "border-red-300 bg-red-50/50" : "hover:border-indigo-200"].join(" ")}>
+    <Card className={["group transition-all duration-300 hover:shadow-lg dark:hover:shadow-2xl dark:bg-zinc-800/80 backdrop-blur-md rounded-2xl border", overdue ? "border-red-300 dark:border-red-500/50 bg-red-50/50 dark:bg-red-500/10" : "border-gray-200/60 dark:border-white/10 hover:border-primary-300 dark:hover:border-primary-500/50"].join(" ")}>
       <CardBody className="p-4 flex flex-col gap-3">
         {/* Header row */}
         <div className="flex items-start justify-between gap-3">
-          <span className="text-sm font-semibold text-gray-800 leading-snug flex-1">{task.title}</span>
+          <span className="text-sm font-bold text-gray-900 dark:text-gray-100 leading-snug flex-1">{task.title}</span>
           <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
             <button
               onClick={() => onEdit(task)}
-              className="p-1.5 rounded-lg hover:bg-indigo-50 text-gray-400 hover:text-indigo-600 transition-colors"
+              className="p-1.5 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-500/10 text-gray-400 dark:text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
               title="Edit"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,7 +51,7 @@ export function TaskCard({ task, onEdit, onDelete, onMove }: TaskCardProps) {
             </button>
             <button
               onClick={() => onDelete(task.id)}
-              className="p-1.5 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-600 transition-colors"
+              className="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-500/10 text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 transition-colors"
               title="Delete"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,15 +63,15 @@ export function TaskCard({ task, onEdit, onDelete, onMove }: TaskCardProps) {
 
         {/* Description */}
         {task.description && (
-          <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">{task.description}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-2">{task.description}</p>
         )}
 
         {/* Footer row */}
-        <div className="flex items-center justify-between gap-2 pt-1">
+        <div className="flex items-center justify-between gap-2 pt-2 border-t border-gray-100 dark:border-white/5 mt-1">
           <div className="flex items-center gap-2 flex-wrap">
             <Badge color={priorityColor}>{priorityLabel}</Badge>
             {task.dueDate && (
-              <span className={["text-xs font-medium px-2 py-1 rounded-full", overdue ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-600"].join(" ")}>
+              <span className={["text-[11px] font-bold px-2 py-1 rounded-full", overdue ? "bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400" : "bg-gray-100 dark:bg-zinc-700 text-gray-600 dark:text-gray-300"].join(" ")}>
                 {overdue ? "⚠ " : ""}
                 {formatDate(task.dueDate)}
               </span>
@@ -82,7 +82,7 @@ export function TaskCard({ task, onEdit, onDelete, onMove }: TaskCardProps) {
           <select
             value={task.status}
             onChange={(e) => onMove(task.id, e.target.value as Status)}
-            className="text-xs font-medium text-gray-500 bg-gray-50 border border-gray-200 rounded-lg px-2 py-1 outline-none cursor-pointer hover:text-indigo-600 hover:border-indigo-200 transition-colors"
+            className="text-[11px] font-bold text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-white/10 rounded-lg px-2.5 py-1.5 outline-none cursor-pointer hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-300 dark:hover:border-primary-500/30 transition-all appearance-none"
             title="Move to column"
           >
             {statusOptions.map(o => (
